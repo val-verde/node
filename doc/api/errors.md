@@ -1433,7 +1433,7 @@ type on execution, such as when a function is expected to return a promise.
 <a id="ERR_INVALID_STATE"></a>
 ### `ERR_INVALID_STATE`
 <!-- YAML
-added: REPLACEME
+added: v15.0.0
 -->
 
 Indicates that an operation cannot be completed due to an invalid state.
@@ -1607,14 +1607,14 @@ is thrown if a required option is missing.
 <a id="ERR_MISSING_TRANSFERABLE_IN_TRANSFER_LIST"></a>
 ### `ERR_MISSING_TRANSFERABLE_IN_TRANSFER_LIST`
 <!-- YAML
-added: REPLACEME
+added: v15.0.0
 -->
 
 An object that needs to be explicitly listed in the `transferList` argument
 is in the object passed to a [`postMessage()`][] call, but is not provided
 in the `transferList` for that call. Usually, this is a `MessagePort`.
 
-In Node.js versions prior to REPLACEME, the error code being used here was
+In Node.js versions prior to v15.0.0, the error code being used here was
 [`ERR_MISSING_MESSAGE_PORT_IN_TRANSFER_LIST`][]. However, the set of
 transferable object types has been expanded to cover more types than
 `MessagePort`.
@@ -2402,11 +2402,11 @@ An invalid or unknown file encoding was passed.
 <a id="ERR_MISSING_MESSAGE_PORT_IN_TRANSFER_LIST"></a>
 ### `ERR_MISSING_MESSAGE_PORT_IN_TRANSFER_LIST`
 <!-- YAML
-removed: REPLACEME
+removed: v15.0.0
 -->
 
 This error code was replaced by [`ERR_MISSING_TRANSFERABLE_IN_TRANSFER_LIST`][]
-in Node.js REPLACEME, because it is no longer accurate as other types of
+in Node.js v15.0.0, because it is no longer accurate as other types of
 transferable objects also exist now.
 
 <a id="ERR_NAPI_CONS_PROTOTYPE_OBJECT"></a>
@@ -2427,7 +2427,7 @@ A Node.js API was called in an unsupported manner, such as
 <a id="ERR_OPERATION_FAILED"></a>
 ### `ERR_OPERATION_FAILED`
 <!-- YAML
-added: REPLACEME
+added: v15.0.0
 -->
 
 An operation failed. This is typically used to signal the general failure

@@ -461,7 +461,7 @@ This behavior has been removed.
 ### DEP0020: `Server.connections`
 <!-- YAML
 changes:
-  - version: REPLACEME
+  - version: v15.0.0
     pr-url: https://github.com/nodejs/node/pull/33647
     description: Server.connections has been removed.
   - version:
@@ -1370,7 +1370,7 @@ an officially supported API.
 ### DEP0068: `node debug`
 <!-- YAML
 changes:
-  - version: REPLACEME
+  - version: v15.0.0
     pr-url: https://github.com/nodejs/node/pull/33648
     description: The legacy `node debug` command was removed.
   - version: v8.0.0
@@ -1479,7 +1479,7 @@ code, no replacement API is provided.
 ### DEP0074: `REPLServer.bufferedCommand`
 <!-- YAML
 changes:
-  - version: REPLACEME
+  - version: v15.0.0
     pr-url: https://github.com/nodejs/node/pull/33286
     description: End-of-Life.
   - version: v9.0.0
@@ -1495,7 +1495,7 @@ The `REPLServer.bufferedCommand` property was deprecated in favor of
 ### DEP0075: `REPLServer.parseREPLKeyword()`
 <!-- YAML
 changes:
-  - version: REPLACEME
+  - version: v15.0.0
     pr-url: https://github.com/nodejs/node/pull/33286
     description: End-of-Life.
   - version: v9.0.0
@@ -1556,7 +1556,7 @@ supported API.
 ### DEP0078: `REPLServer.turnOffEditorMode()`
 <!-- YAML
 changes:
-  - version: REPLACEME
+  - version: v15.0.0
     pr-url: https://github.com/nodejs/node/pull/33286
     description: End-of-Life.
   - version: v9.0.0
@@ -1620,7 +1620,7 @@ file descriptors.
 ### DEP0082: `REPLServer.prototype.memory()`
 <!-- YAML
 changes:
-  - version: REPLACEME
+  - version: v15.0.0
     pr-url: https://github.com/nodejs/node/pull/33286
     description: End-of-Life.
   - version: v9.0.0
@@ -2281,7 +2281,7 @@ Setting the TLS ServerName to an IP address is not permitted by
 ### DEP0124: using `REPLServer.rli`
 <!-- YAML
 changes:
-  - version: REPLACEME
+  - version: v15.0.0
     pr-url: https://github.com/nodejs/node/pull/33286
     description: End-of-Life.
   - version: v12.0.0
