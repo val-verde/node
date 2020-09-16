@@ -26,7 +26,9 @@
 #include <vector>
 
 #if V8_LIBC_GLIBC || V8_LIBC_BSD || V8_LIBC_UCLIBC || V8_OS_SOLARIS
+#if !defined(__ANDROID__)
 #define HAVE_EXECINFO_H 1
+#endif
 #endif
 
 #if HAVE_EXECINFO_H
