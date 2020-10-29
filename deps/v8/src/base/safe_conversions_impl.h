@@ -153,10 +153,10 @@ struct DstRangeRelationToSrcRangeImpl<Dst,
                                       NUMERIC_RANGE_NOT_CONTAINED> {
   static RangeConstraint Check(Src value) {
     return std::numeric_limits<Dst>::is_iec559
-               ? GetRangeConstraint(value <= std::numeric_limits<Dst>::max(),
-                                    value >= -std::numeric_limits<Dst>::max())
-               : GetRangeConstraint(value <= std::numeric_limits<Dst>::max(),
-                                    value >= std::numeric_limits<Dst>::min());
+               ? GetRangeConstraint(static_cast<Dst>(value) <= std::numeric_limits<Dst>::max(),
+                                    static_cast<Dst>(value) >= -std::numeric_limits<Dst>::max())
+               : GetRangeConstraint(static_cast<Dst>(value) <= std::numeric_limits<Dst>::max(),
+                                    static_cast<Dst>(value) >= std::numeric_limits<Dst>::min());
   }
 };
 
