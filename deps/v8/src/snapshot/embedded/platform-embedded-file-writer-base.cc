@@ -140,6 +140,8 @@ EmbeddedTargetOs ToEmbeddedTargetOs(const char* s) {
     return EmbeddedTargetOs::kMac;
   } else if (string == "win") {
     return EmbeddedTargetOs::kWin;
+  } else if (string == "mingw32") {
+    return EmbeddedTargetOs::kWin;
   } else {
     return EmbeddedTargetOs::kGeneric;
   }
