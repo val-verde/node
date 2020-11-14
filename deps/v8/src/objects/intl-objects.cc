@@ -217,13 +217,13 @@ icu::StringPiece ToICUStringPiece(Isolate* isolate, Handle<String> string) {
   DisallowHeapAllocation no_gc;
 
   const String::FlatContent& flat = string->GetFlatContent(no_gc);
-  if (!flat.IsOneByte()) return icu::StringPiece(nullptr, 0);
+  if (!flat.IsOneByte()) return icu::StringPiece(static_cast<char *>(nullptr), 0);
 
   int32_t length = string->length();
   const char* char_buffer =
       reinterpret_cast<const char*>(flat.ToOneByteVector().begin());
   if (!String::IsAscii(char_buffer, length)) {
-    return icu::StringPiece(nullptr, 0);
+    return icu::StringPiece(static_cast<char *>(nullptr), 0);
   }
 
   return icu::StringPiece(char_buffer, length);
