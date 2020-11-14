@@ -7857,7 +7857,7 @@ typedef void (*JitCodeEventHandler)(const JitCodeEvent* event);
  */
 #if defined(V8_OS_WIN)
 typedef int (*UnhandledExceptionCallback)(
-    _EXCEPTION_POINTERS* exception_pointers);
+    struct _EXCEPTION_POINTERS* exception_pointers);
 #endif
 
 /**
