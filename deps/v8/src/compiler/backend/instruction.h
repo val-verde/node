@@ -42,7 +42,7 @@ class SourcePositionTable;
 #define INSTRUCTION_OPERAND_ALIGN ALIGNAS(8)
 #endif
 
-class V8_EXPORT_PRIVATE INSTRUCTION_OPERAND_ALIGN InstructionOperand {
+class INSTRUCTION_OPERAND_ALIGN V8_EXPORT_PRIVATE InstructionOperand {
  public:
   static const int kInvalidVirtualRegister = -1;
 
