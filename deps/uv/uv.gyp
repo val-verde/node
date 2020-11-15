@@ -1,7 +1,7 @@
 {
   'variables': {
     'conditions': [
-      ['OS=="win"', {
+      ['OS=="win" or OS=="mingw32"', {
         'shared_unix_defines': [ ],
       }, {
         'shared_unix_defines': [
@@ -96,7 +96,7 @@
         'OTHER_CFLAGS': [ '-g', '--std=gnu89' ],
       },
       'conditions': [
-        [ 'OS=="win"', {
+        [ 'OS=="win" or OS=="mingw32"', {
           'defines': [
             '_WIN32_WINNT=0x0600',
             '_GNU_SOURCE',

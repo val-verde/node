@@ -52,7 +52,7 @@
             ],
           },
           'conditions': [
-            ['OS!="win"', {
+            ['OS!="win" and OS!="mingw32"', {
               'cflags!': [ '-ansi' ],
               'defines': [ 'HAVE_HIDDEN' ],
             }],
@@ -122,10 +122,10 @@
                     ['OS=="linux"', {
                       'defines': [ 'ARMV8_OS_LINUX' ],
                     }],
-                    ['OS=="win"', {
+                    ['OS=="win" or OS=="mingw32"', {
                       'defines': [ 'ARMV8_OS_WINDOWS' ],
                     }],
-                    ['OS!="android" and OS!="win" and llvm_version=="0.0"', {
+                    ['OS!="android" and OS!="win" and OS!="mingw32" and llvm_version=="0.0"', {
                       'cflags': [
                         '-march=armv8-a+crc',
                       ],

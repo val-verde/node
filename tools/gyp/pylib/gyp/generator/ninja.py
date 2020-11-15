@@ -1225,9 +1225,9 @@ class NinjaWriter(object):
             if ext in ("cc", "cpp", "cxx"):
                 command = "cxx"
                 self.target.uses_cpp = True
-            elif ext == "c" or (ext == "S" and self.flavor != "win"):
+            elif ext == "c" or (ext == "S" and self.flavor != "win" and self.flavor != "mingw32"):
                 command = "cc"
-            elif ext == "s" and self.flavor != "win":  # Doesn't generate .o.d files.
+            elif ext == "s" and self.flavor != "win" and self.flavor != "mingw32":  # Doesn't generate .o.d files.
                 command = "cc_s"
             elif (
                 self.flavor == "win"
