@@ -99,7 +99,7 @@ class SignalWrap : public HandleWrap {
     Environment* env = wrap->env();
     int signum;
     if (!args[0]->Int32Value(env->context()).To(&signum)) return;
-#if defined(__POSIX__) && HAVE_INSPECTOR
+#if defined(__POSIX__) && HAVE_INSPECTOR && !defined(__MINGW32__)
     if (signum == SIGPROF) {
       Environment* env = Environment::GetCurrent(args);
       if (env->inspector_agent()->IsListening()) {

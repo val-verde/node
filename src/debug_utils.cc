@@ -2,7 +2,7 @@
 #include "env-inl.h"
 #include "node_internals.h"
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 #if defined(__linux__)
 #include <features.h>
 #endif
@@ -45,8 +45,8 @@
 #endif                // _AIX
 
 #ifdef _WIN32
-#include <Lm.h>
-#include <Windows.h>
+#include <lm.h>
+#include <windows.h>
 #include <dbghelp.h>
 #include <process.h>
 #include <psapi.h>

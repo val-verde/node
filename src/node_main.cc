@@ -24,8 +24,8 @@
 
 #ifdef _WIN32
 #include <windows.h>
-#include <VersionHelpers.h>
-#include <WinError.h>
+#include <versionhelpers.h>
+#include <winerror.h>
 
 #define SKIP_CHECK_VAR "NODE_SKIP_PLATFORM_CHECK"
 #define SKIP_CHECK_SIZE 1

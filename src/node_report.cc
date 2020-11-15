@@ -10,7 +10,7 @@
 #include "util.h"
 
 #ifdef _WIN32
-#include <Windows.h>
+#include <windows.h>
 #else  // !_WIN32
 #include <cxxabi.h>
 #include <sys/resource.h>

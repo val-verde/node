@@ -3,7 +3,7 @@
 
 #if defined(NODE_WANT_INTERNALS) && NODE_WANT_INTERNALS
 
-#if defined(__POSIX__)
+#if defined(__POSIX__) && !defined(__MINGW32__)
 #include <dlfcn.h>
 #endif
 
@@ -55,7 +55,7 @@ namespace binding {
 
 class DLib {
  public:
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   static const int kDefaultFlags = RTLD_LAZY;
 #else
   static const int kDefaultFlags = 0;
@@ -73,7 +73,7 @@ class DLib {
   const int flags_;
   std::string errmsg_;
   void* handle_;
-#ifndef __POSIX__
+#if !(defined(__POSIX__) && !defined(__MINGW32__))
   uv_lib_t lib_;
 #endif
   bool has_entry_in_global_handle_map_ = false;

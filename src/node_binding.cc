@@ -322,7 +322,7 @@ static struct global_handle_map_t {
 DLib::DLib(const char* filename, int flags)
     : filename_(filename), flags_(flags), handle_(nullptr) {}
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 bool DLib::Open() {
   handle_ = dlopen(filename_.c_str(), flags_);
   if (handle_ != nullptr) return true;

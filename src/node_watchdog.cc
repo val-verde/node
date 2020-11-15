@@ -220,7 +220,7 @@ void TraceSigintWatchdog::HandleInterrupt() {
   raise(SIGINT);
 }
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 void* SigintWatchdogHelper::RunSigintWatchdog(void* arg) {
   // Inside the helper thread.
   bool is_stopping;
@@ -261,7 +261,7 @@ bool SigintWatchdogHelper::InformWatchdogsAboutSignal() {
   Mutex::ScopedLock list_lock(instance.list_mutex_);
 
   bool is_stopping = false;
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   is_stopping = instance.stopping_;
 #endif
 
@@ -290,7 +290,7 @@ int SigintWatchdogHelper::Start() {
     return 0;
   }
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   CHECK_EQ(has_running_thread_, false);
   has_pending_signal_ = false;
   stopping_ = false;
@@ -334,7 +334,7 @@ bool SigintWatchdogHelper::Stop() {
       return had_pending_signal;
     }
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
     // Set stopping now because it's only protected by list_mutex_.
     stopping_ = true;
 #endif
@@ -342,7 +342,7 @@ bool SigintWatchdogHelper::Stop() {
     watchdogs_.clear();
   }
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   if (!has_running_thread_) {
     has_pending_signal_ = false;
     return had_pending_signal;
@@ -392,7 +392,7 @@ void SigintWatchdogHelper::Unregister(SigintWatchdogBase* wd) {
 SigintWatchdogHelper::SigintWatchdogHelper()
     : start_stop_count_(0),
       has_pending_signal_(false) {
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   has_running_thread_ = false;
   stopping_ = false;
   CHECK_EQ(0, uv_sem_init(&sem_, 0));
@@ -406,7 +406,7 @@ SigintWatchdogHelper::~SigintWatchdogHelper() {
   start_stop_count_ = 0;
   Stop();
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   CHECK_EQ(has_running_thread_, false);
   uv_sem_destroy(&sem_);
 #endif

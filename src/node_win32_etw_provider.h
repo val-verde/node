@@ -29,7 +29,7 @@
 
 namespace node {
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 # define INLINE __forceinline
 #else
 # define INLINE inline

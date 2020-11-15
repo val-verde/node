@@ -41,7 +41,7 @@
 
 // This should be defined in make system.
 // See issue https://github.com/nodejs/node-v0.x-archive/issues/1236
-#if defined(__MINGW32__) || defined(_MSC_VER)
+#if defined(__MINGW32__) || defined(_WIN32)
 #ifndef _WIN32_WINNT
 # define _WIN32_WINNT 0x0600  // Windows Server 2008
 #endif
@@ -52,7 +52,7 @@
 
 #endif
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 #define PATH_MAX MAX_PATH
 #endif
 
@@ -99,7 +99,7 @@
 # if NODE_CLANG_AT_LEAST(2, 9, 0) || NODE_GNUC_AT_LEAST(4, 5, 0)
 #  define NODE_DEPRECATED(message, declarator)                                 \
     __attribute__((deprecated(message))) declarator
-# elif defined(_MSC_VER)
+# elif defined(_WIN32)
 #  define NODE_DEPRECATED(message, declarator)                                 \
     __declspec(deprecated) declarator
 # else
@@ -814,7 +814,7 @@ extern "C" NODE_EXTERN void node_module_register(void* mod);
 # define NODE_CTOR_PREFIX static
 #endif
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 #pragma section(".CRT$XCU", read)
 #define NODE_C_CTOR(fn)                                               \
   NODE_CTOR_PREFIX void __cdecl fn(void);                             \
