@@ -264,7 +264,7 @@ bool Isolate::CurrentEmbeddedBlobIsBinaryEmbedded() {
   // embedded blob may change (e.g. in tests or mksnapshot). If the blob is
   // binary-embedded, it is immortal immovable.
   const uint8_t* code =
-      current_embedded_blob_code_.load(std::memory_order::memory_order_relaxed);
+      current_embedded_blob_code_.load(std::memory_order_relaxed);
   if (code == nullptr) return false;
 #ifdef V8_MULTI_SNAPSHOTS
   if (code == TrustedEmbeddedBlobCode()) return true;
@@ -341,25 +341,25 @@ uint32_t Isolate::embedded_blob_metadata_size() const {
 // static
 const uint8_t* Isolate::CurrentEmbeddedBlobCode() {
   return current_embedded_blob_code_.load(
-      std::memory_order::memory_order_relaxed);
+      std::memory_order_relaxed);
 }
 
 // static
 uint32_t Isolate::CurrentEmbeddedBlobCodeSize() {
   return current_embedded_blob_code_size_.load(
-      std::memory_order::memory_order_relaxed);
+      std::memory_order_relaxed);
 }
 
 // static
 const uint8_t* Isolate::CurrentEmbeddedBlobMetadata() {
   return current_embedded_blob_metadata_.load(
-      std::memory_order::memory_order_relaxed);
+      std::memory_order_relaxed);
 }
 
 // static
 uint32_t Isolate::CurrentEmbeddedBlobMetadataSize() {
   return current_embedded_blob_metadata_size_.load(
-      std::memory_order::memory_order_relaxed);
+      std::memory_order_relaxed);
 }
 
 size_t Isolate::HashIsolateForEmbeddedBlob() {
