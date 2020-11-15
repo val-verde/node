@@ -1,7 +1,7 @@
 {
   'target_defaults': {
     'conditions': [
-      ['OS!="win"', {
+      ['OS!="win" and OS!="mingw32"', {
         'defines': [
           '_DARWIN_USE_64_BIT_INODE=1',
           '_LARGEFILE_SOURCE',
@@ -117,7 +117,7 @@
         }, {
           'defines': [ 'CARES_BUILDING_LIBRARY' ]
         }],
-        [ 'OS=="win"', {
+        [ 'OS=="win" or OS=="mingw32"', {
           'defines': [
             'CARES_PULL_WS2TCPIP_H=1',
             '_WINSOCK_DEPRECATED_NO_WARNINGS',
@@ -145,7 +145,7 @@
           ],
           'defines': [ 'HAVE_CONFIG_H' ],
         }],
-        [ 'OS not in "win android"', {
+        [ 'OS not in "win mingw32 android"', {
           'cflags': [
             '--std=gnu89'
           ],

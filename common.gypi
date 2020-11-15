@@ -82,7 +82,7 @@
     ##### end V8 defaults #####
 
     'conditions': [
-      ['OS == "win"', {
+      ['OS == "win" or OS == "mingw32"', {
         'os_posix': 0,
         'v8_postmortem_support%': 0,
         'obj_dir': '<(PRODUCT_DIR)/obj',
@@ -193,7 +193,7 @@
             # pull in V8's postmortem metadata
             'ldflags': [ '-Wl,-z,allextract' ]
           }],
-          ['OS!="mac" and OS!="win"', {
+          ['OS!="mac" and OS!="win" and OS!="mingw32"', {
             'cflags': [ '-fno-omit-frame-pointer' ],
           }],
           ['OS=="linux"', {
@@ -353,19 +353,28 @@
       ['v8_enable_pointer_compression == 1 or v8_enable_31bit_smis_on_64bit_arch == 1', {
         'defines': ['V8_31BIT_SMIS_ON_64BIT_ARCH'],
       }],
-      ['OS == "win"', {
-        'defines': [
-          'WIN32',
-          # we don't really want VC++ warning us about
-          # how dangerous C functions are...
-          '_CRT_SECURE_NO_DEPRECATE',
-          # ... or that C implementations shouldn't use
-          # POSIX names
-          '_CRT_NONSTDC_NO_DEPRECATE',
-          # Make sure the STL doesn't try to use exceptions
-          '_HAS_EXCEPTIONS=0',
-          'BUILDING_V8_SHARED=1',
-          'BUILDING_UV_SHARED=1',
+      ['OS == "win" or OS == "mingw32"', {
+        'target_conditions': [
+          ['_toolset=="host"', {
+            'cflags': [ '-pthread' ],
+            'ldflags': [ '-pthread' ],
+          }],
+          ['_toolset=="target"', {
+            'defines': [
+              'UNICODE',
+              'WIN32',
+              # we don't really want VC++ warning us about
+              # how dangerous C functions are...
+              '_CRT_SECURE_NO_DEPRECATE',
+              # ... or that C implementations shouldn't use
+              # POSIX names
+              '_CRT_NONSTDC_NO_DEPRECATE',
+              # Make sure the STL doesn't try to use exceptions
+              '_HAS_EXCEPTIONS=0',
+              'BUILDING_V8_SHARED=1',
+              'BUILDING_UV_SHARED=1',
+            ],
+          }],
         ],
       }],
       [ 'OS in "linux freebsd openbsd solaris aix"', {

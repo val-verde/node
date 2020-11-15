@@ -1095,26 +1095,40 @@
           ]
         }],
         ['is_win', {
-          'sources': [
-            '<(V8_ROOT)/src/base/debug/stack_trace_win.cc',
-            '<(V8_ROOT)/src/base/platform/platform-win32.cc',
-            '<(V8_ROOT)/src/base/win32-headers.h',
+          'target_conditions': [
+            ['_toolset=="host"', {
+              'sources': [
+                '<(V8_ROOT)/src/base/debug/stack_trace_posix.cc',
+                '<(V8_ROOT)/src/base/platform/platform-posix.cc',
+                '<(V8_ROOT)/src/base/platform/platform-posix.h',
+                '<(V8_ROOT)/src/base/platform/platform-posix-time.cc',
+                '<(V8_ROOT)/src/base/platform/platform-posix-time.h',
+                '<(V8_ROOT)/src/base/platform/platform-linux.cc',
+              ],
+            }],
+            ['_toolset=="target"', {
+              'sources': [
+                '<(V8_ROOT)/src/base/debug/stack_trace_win.cc',
+                '<(V8_ROOT)/src/base/platform/platform-win32.cc',
+                '<(V8_ROOT)/src/base/win32-headers.h',
+              ],
+              'conditions': [['target_arch == "arm64"', {
+                'defines': ['_WIN32_WINNT=0x0602'], # For GetCurrentThreadStackLimits on Windows on Arm
+              }]],
+              'defines': ['_CRT_RAND_S'], # for rand_s()
+              # 'direct_dependent_settings': {
+              #   'msvs_settings': {
+              #     'VCLinkerTool': {
+              #       'AdditionalDependencies': [
+              #         'dbghelp.lib',
+              #         'winmm.lib',
+              #         'ws2_32.lib'
+              #       ]
+              #    }
+              #   },
+              # },
+            }],
           ],
-          'conditions': [['target_arch == "arm64"', {
-            'defines': ['_WIN32_WINNT=0x0602'], # For GetCurrentThreadStackLimits on Windows on Arm
-          }]],
-          'defines': ['_CRT_RAND_S'], # for rand_s()
-          'direct_dependent_settings': {
-            'msvs_settings': {
-              'VCLinkerTool': {
-                'AdditionalDependencies': [
-                  'dbghelp.lib',
-                  'winmm.lib',
-                  'ws2_32.lib'
-                ]
-              }
-            },
-          },
         }],
         ['target_arch == "mips" or OS == "mips64"', {
           # here just for 'BUILD.gn' sync
@@ -1763,13 +1777,14 @@
         ['want_separate_host_toolset', {
           'toolsets': ['host', 'target'],
         }],
-        ['OS=="win"', {
-          'conditions': [
+        ['OS=="win" or OS=="mingw32"', {
+          'target_conditions': [
             ['"<(target_arch)"=="arm64" and _toolset=="target"', {
               'defines': ['CPU_NO_SIMD']
-            }, {
+            }],
+            ['"<(target_arch)"=="x64" and _toolset=="target"', {
               'defines': ['X86_WINDOWS']
-            }]
+            }],
           ]
         }],
       ],

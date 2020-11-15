@@ -36,7 +36,7 @@
     # Emulate GN variables
     # https://chromium.googlesource.com/chromium/src/build/+/556c524beb09c332698debe1b47b065d5d029cd0/config/BUILDCONFIG.gn#269
     'conditions': [
-      ['OS == "win" or OS == "winuwp"', {
+      ['OS == "win" or OS == "mingw32" or OS == "winuwp"', {
         'is_win': 1,
       }, {
         'is_win': 0,
@@ -52,7 +52,7 @@
         'is_android': 0,
       }],
       # flattened (!is_win && !is_fuchsia) because of GYP evaluation order
-      ['not (OS == "win" or OS == "winuwp") and not (OS == "fuchsia")', {
+      ['not (OS == "win" or OS == "mingw32" or OS == "winuwp") and not (OS == "fuchsia")', {
         'is_posix': 1,
       }, {
         'is_posix': 0,
