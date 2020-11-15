@@ -23,6 +23,8 @@
 // context. Some additional code is used both inside and outside the signal
 // handler. This code can be found in handler-shared.cc.
 
+#if defined(__linux__)
+
 #include "src/trap-handler/handler-inside-posix.h"
 
 #include <signal.h>
@@ -155,3 +157,5 @@ void HandleSignal(int signum, siginfo_t* info, void* context) {
 }  // namespace trap_handler
 }  // namespace internal
 }  // namespace v8
+
+#endif

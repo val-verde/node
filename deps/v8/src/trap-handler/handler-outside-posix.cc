@@ -19,6 +19,8 @@
 //
 // For the code that runs in the signal handler itself, see handler-inside.cc.
 
+#if defined(__linux__)
+
 #include <signal.h>
 
 #include "src/trap-handler/handler-inside-posix.h"
@@ -88,3 +90,4 @@ void RemoveTrapHandler() {
 }  // namespace trap_handler
 }  // namespace internal
 }  // namespace v8
+#endif
