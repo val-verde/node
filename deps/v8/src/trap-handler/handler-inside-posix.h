@@ -5,6 +5,8 @@
 #ifndef V8_TRAP_HANDLER_HANDLER_INSIDE_POSIX_H_
 #define V8_TRAP_HANDLER_HANDLER_INSIDE_POSIX_H_
 
+#if defined(__linux__)
+
 #include <signal.h>
 #include "include/v8config.h"
 
@@ -27,5 +29,7 @@ bool TryHandleSignal(int signum, siginfo_t* info, void* context);
 }  // namespace trap_handler
 }  // namespace internal
 }  // namespace v8
+
+#endif
 
 #endif  // V8_TRAP_HANDLER_HANDLER_INSIDE_POSIX_H_
