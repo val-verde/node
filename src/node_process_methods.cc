@@ -21,11 +21,10 @@
 #include <climits>  // PATH_MAX
 #include <cstdio>
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 #include <direct.h>
 #include <io.h>
 #define umask _umask
-typedef int mode_t;
 #else
 #include <pthread.h>
 #include <sys/resource.h>  // getrlimit, setrlimit
@@ -287,7 +286,7 @@ static void ResourceUsage(const FunctionCallbackInfo<Value>& args) {
   fields[15] = rusage.ru_nivcsw;
 }
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 static void DebugProcess(const FunctionCallbackInfo<Value>& args) {
   Environment* env = Environment::GetCurrent(args);
 

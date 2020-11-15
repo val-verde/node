@@ -148,7 +148,7 @@ int NodeMainInstance::Run(const EnvSerializeInfo* env_info) {
 
     // TODO(addaleax): Neither NODE_SHARED_MODE nor HAVE_INSPECTOR really
     // make sense here.
-#if HAVE_INSPECTOR && defined(__POSIX__) && !defined(NODE_SHARED_MODE)
+#if HAVE_INSPECTOR && defined(__POSIX__) && !defined(NODE_SHARED_MODE) && !defined(__MINGW32__)
   struct sigaction act;
   memset(&act, 0, sizeof(act));
   for (unsigned nr = 1; nr < kMaxSignal; nr += 1) {

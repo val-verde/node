@@ -43,7 +43,7 @@ typedef struct napi_module {
 
 #define NAPI_MODULE_VERSION  1
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 #pragma section(".CRT$XCU", read)
 #define NAPI_C_CTOR(fn)                                                     \
   static void __cdecl fn(void);                                             \

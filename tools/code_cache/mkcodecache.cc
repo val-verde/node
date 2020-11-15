@@ -17,8 +17,8 @@ using v8::Isolate;
 using v8::Local;
 
 #ifdef _WIN32
-#include <VersionHelpers.h>
-#include <WinError.h>
+#include <versionhelpers.h>
+#include <winerror.h>
 #include <windows.h>
 
 int wmain(int argc, wchar_t* argv[]) {

@@ -37,14 +37,14 @@
 #include <vector>
 #include <unordered_set>
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 # include <netdb.h>
 #endif  // __POSIX__
 
 #if defined(__ANDROID__) || \
     defined(__MINGW32__) || \
     defined(__OpenBSD__) || \
-    defined(_MSC_VER)
+    defined(_WIN32)
 
 # include <nameser.h>
 #else

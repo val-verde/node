@@ -90,7 +90,7 @@ void PrintCaughtException(v8::Isolate* isolate,
                           const v8::TryCatch& try_catch);
 
 void ResetStdio();  // Safe to call more than once and from signal handlers.
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 void SignalExit(int signal, siginfo_t* info, void* ucontext);
 #endif
 
@@ -280,7 +280,7 @@ class ThreadPoolWork {
 
 // Functions defined in node.cc that are exposed via the bootstrapper object
 
-#if defined(__POSIX__) && !defined(__ANDROID__) && !defined(__CloudABI__)
+#if defined(__POSIX__) && !defined(__ANDROID__) && !defined(__CloudABI__) && !defined(__MINGW32__)
 #define NODE_IMPLEMENTS_POSIX_CREDENTIALS 1
 #endif  // __POSIX__ && !defined(__ANDROID__) && !defined(__CloudABI__)
 
@@ -322,7 +322,7 @@ void StartProfilers(Environment* env);
 }
 #endif  // HAVE_INSPECTOR
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 static constexpr unsigned kMaxSignal = 32;
 #endif
 

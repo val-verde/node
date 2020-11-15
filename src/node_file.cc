@@ -40,7 +40,7 @@
 #include <cerrno>
 #include <climits>
 
-#if defined(__MINGW32__) || defined(_MSC_VER)
+#if defined(__MINGW32__) || defined(_WIN32)
 # include <io.h>
 #endif
 
