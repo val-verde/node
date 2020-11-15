@@ -26,7 +26,7 @@
 
 #include "zlib.h"
 
-#if !defined(_MSC_VER)
+#if !defined(_WIN32)
 #include <unistd.h>
 #endif
 
@@ -43,7 +43,7 @@
 #endif  // !OPENSSL_NO_ENGINE
 #endif  // HAVE_OPENSSL
 
-#if defined(__POSIX__)
+#if defined(__POSIX__) && !defined(__MINGW32__)
 #include <dlfcn.h>
 #endif
 

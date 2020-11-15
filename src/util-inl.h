@@ -40,7 +40,7 @@
 # undef BSWAP_8
 #endif
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 #include <intrin.h>
 #define BSWAP_2(x) _byteswap_ushort(x)
 #define BSWAP_4(x) _byteswap_ulong(x)
@@ -207,7 +207,7 @@ inline v8::Local<v8::String> OneByteString(v8::Isolate* isolate,
 void SwapBytes16(char* data, size_t nbytes) {
   CHECK_EQ(nbytes % 2, 0);
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
   if (AlignUp(data, sizeof(uint16_t)) == data) {
     // MSVC has no strict aliasing, and is able to highly optimize this case.
     uint16_t* data16 = reinterpret_cast<uint16_t*>(data);
@@ -230,7 +230,7 @@ void SwapBytes16(char* data, size_t nbytes) {
 void SwapBytes32(char* data, size_t nbytes) {
   CHECK_EQ(nbytes % 4, 0);
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
   // MSVC has no strict aliasing, and is able to highly optimize this case.
   if (AlignUp(data, sizeof(uint32_t)) == data) {
     uint32_t* data32 = reinterpret_cast<uint32_t*>(data);
@@ -253,7 +253,7 @@ void SwapBytes32(char* data, size_t nbytes) {
 void SwapBytes64(char* data, size_t nbytes) {
   CHECK_EQ(nbytes % 8, 0);
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
   if (AlignUp(data, sizeof(uint64_t)) == data) {
     // MSVC has no strict aliasing, and is able to highly optimize this case.
     uint64_t* data64 = reinterpret_cast<uint64_t*>(data);

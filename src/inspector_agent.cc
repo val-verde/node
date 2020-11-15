@@ -21,7 +21,7 @@
 
 #include "libplatform/libplatform.h"
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 #include <pthread.h>
 #include <climits>  // PTHREAD_STACK_MIN
 #endif  // __POSIX__
@@ -73,7 +73,7 @@ void StartIoThreadAsyncCallback(uv_async_t* handle) {
 }
 
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 static void StartIoThreadWakeup(int signo, siginfo_t* info, void* ucontext) {
   uv_sem_post(&start_io_thread_semaphore);
 }

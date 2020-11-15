@@ -8,7 +8,7 @@
 #include <pwd.h>  // getpwnam()
 #endif            // NODE_IMPLEMENTS_POSIX_CREDENTIALS
 
-#if !defined(_MSC_VER)
+#if !defined(_WIN32)
 #include <unistd.h>  // setuid, getuid
 #endif
 

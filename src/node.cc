@@ -99,7 +99,7 @@
 #include <sanitizer/lsan_interface.h>
 #endif
 
-#if defined(_MSC_VER)
+#if defined(_WIN32)
 #include <direct.h>
 #include <io.h>
 #define STDIN_FILENO 0
@@ -161,7 +161,7 @@ PVOID old_vectored_exception_handler;
 struct V8Platform v8_platform;
 }  // namespace per_process
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 void SignalExit(int signo, siginfo_t* info, void* ucontext) {
   ResetStdio();
   raise(signo);
@@ -514,7 +514,7 @@ MaybeLocal<Value> StartExecution(Environment* env, StartExecutionCallback cb) {
   return StartExecution(env, "internal/main/eval_stdin");
 }
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 typedef void (*sigaction_cb)(int signo, siginfo_t* info, void* ucontext);
 #endif
 #if NODE_USE_V8_WASM_TRAP_HANDLER
@@ -548,7 +548,7 @@ void TrapWebAssemblyOrContinue(int signo, siginfo_t* info, void* ucontext) {
 #endif  // defined(_WIN32)
 #endif  // NODE_USE_V8_WASM_TRAP_HANDLER
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 void RegisterSignalHandler(int signal,
                            sigaction_cb handler,
                            bool reset_handler) {
@@ -570,7 +570,7 @@ void RegisterSignalHandler(int signal,
 }
 #endif  // __POSIX__
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 static struct {
   int flags;
   bool isatty;
@@ -581,7 +581,7 @@ static struct {
 
 
 inline void PlatformInit() {
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 #if HAVE_INSPECTOR
   sigset_t sigmask;
   sigemptyset(&sigmask);
@@ -712,7 +712,7 @@ inline void PlatformInit() {
 // Safe to call more than once and from signal handlers.
 void ResetStdio() {
   uv_tty_reset_mode();
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   for (auto& s : stdio) {
     const int fd = &s - stdio;
 
@@ -817,7 +817,7 @@ int ProcessGlobalArgs(std::vector<std::string>* args,
     env_opts->abort_on_uncaught_exception = true;
   }
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   // Block SIGPROF signals when sleeping in epoll_wait/kevent/etc.  Avoids the
   // performance penalty of frequent EINTR wakeups when the profiler is running.
   // Only do this for v8.log profiling, as it breaks v8::CpuProfiler users.

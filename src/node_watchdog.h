@@ -31,7 +31,7 @@
 #include "uv.h"
 #include "v8.h"
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
 #include <pthread.h>
 #endif
 
@@ -131,7 +131,7 @@ class SigintWatchdogHelper {
   std::vector<SigintWatchdogBase*> watchdogs_;
   bool has_pending_signal_;
 
-#ifdef __POSIX__
+#if defined(__POSIX__) && !defined(__MINGW32__)
   pthread_t thread_;
   uv_sem_t sem_;
   bool has_running_thread_;
