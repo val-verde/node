@@ -4003,8 +4003,8 @@ v8_component("v8_libbase") {
 
   if (is_linux) {
     sources += [
-      "src/base/debug/stack_trace_posix.cc",
-      "src/base/platform/platform-linux.cc",
+      # "src/base/debug/stack_trace_posix.cc",
+      # "src/base/platform/platform-linux.cc",
     ]
 
     libs = [
