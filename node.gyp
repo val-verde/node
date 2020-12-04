@@ -347,7 +347,7 @@
         ],
       }],
       ['OS == "linux" and llvm_version != "0.0"', {
-        'libraries': ['-latomic'],
+        'libraries': ['-rtlib=compiler-rt'],
       }],
     ],
   },
