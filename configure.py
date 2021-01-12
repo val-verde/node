@@ -1188,9 +1188,6 @@ def configure_node(o):
     if flavor in ('linux', 'freebsd'):
       use_dtrace = options.with_dtrace
 
-    if flavor == 'linux':
-      if options.systemtap_includes:
-        o['include_dirs'] += [options.systemtap_includes]
     o['variables']['node_use_dtrace'] = b(use_dtrace)
   elif options.with_dtrace:
     raise Exception(
@@ -1293,9 +1290,6 @@ def configure_library(lib, output, pkgname=None):
 
     if options.__dict__[shared_lib + '_includes']:
       output['include_dirs'] += [options.__dict__[shared_lib + '_includes']]
-    elif pkg_cflags:
-      stripped_flags = [flag.strip() for flag in pkg_cflags.split('-I')]
-      output['include_dirs'] += [flag for flag in stripped_flags if flag]
 
     # libpath needs to be provided ahead libraries
     if options.__dict__[shared_lib + '_libpath']:
@@ -1307,8 +1301,6 @@ def configure_library(lib, output, pkgname=None):
       else:
         output['libraries'] += [
             '-L%s' % options.__dict__[shared_lib + '_libpath']]
-    elif pkg_libpath:
-      output['libraries'] += [pkg_libpath]
 
     default_libs = getattr(options, shared_lib + '_libname')
     default_libs = ['-l{0}'.format(l) for l in default_libs.split(',')]
@@ -1536,13 +1528,8 @@ def configure_intl(o):
       error('icu4c v%s is too old, v%d.x or later is required.' %
             (icuversion, icu_versions['minimum_icu']))
     # libpath provides linker path which may contain spaces
-    if libpath:
-      o['libraries'] += [libpath]
     # safe to split, cannot contain spaces
     o['libraries'] += libs.split()
-    if cflags:
-      stripped_flags = [flag.strip() for flag in cflags.split('-I')]
-      o['include_dirs'] += [flag for flag in stripped_flags if flag]
     # use the "system" .gyp
     o['variables']['icu_gyp_path'] = 'tools/icu/icu-system.gyp'
     return
